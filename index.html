@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizLink - Professional Networking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="#" id="logo" class="logo" aria-label="Go to Home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                BizLink
+            </a>
+
+            <!-- Search Form -->
+            <form id="searchForm" class="search-form" role="search">
+                <div class="search-container">
+                    <input 
+                        type="search" 
+                        id="searchInput" 
+                        placeholder="Search posts and people..." 
+                        aria-label="Search posts and people"
+                        autocomplete="off"
+                    >
+                    <button type="submit" id="searchBtn" aria-label="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                            <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <button id="btnHome" class="nav-btn active" aria-label="Home">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
+                        <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Home
+                </button>
+                <button id="btnProfile" class="nav-btn" aria-label="Profile">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Profile
+                </button>
+                <button id="btnLogin" class="nav-btn" aria-label="Login">Login</button>
+                <button id="btnRegister" class="nav-btn secondary" aria-label="Register">Register</button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active" aria-label="Home feed">
+            <!-- Post Composer -->
+            <div class="card composer" id="composer">
+                <div class="composer-header">
+                    <div class="avatar">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h2>Share an update</h2>
+                </div>
+                
+                <form class="composer-form">
+                    <textarea 
+                        id="postText" 
+                        placeholder="Share your latest update..." 
+                        maxlength="1000"
+                        aria-label="Post content"
+                        rows="3"
+                    ></textarea>
+                    
+                    <div class="composer-actions">
+                        <div class="file-upload">
+                            <label for="postImages" class="file-label">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="21,15 16,10 5,21" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                Add Images
+                            </label>
+                            <input 
+                                type="file" 
+                                id="postImages" 
+                                accept=".jpg,.jpeg,.png,.webp" 
+                                multiple 
+                                aria-label="Upload images"
+                            >
+                        </div>
+                        
+                        <button type="submit" id="btnPost" disabled aria-label="Publish post">Post</button>
+                    </div>
+                    
+                    <div id="imagePreview" class="image-preview" aria-label="Image previews"></div>
+                </form>
+            </div>
+
+            <!-- Feed -->
+            <div id="feed" class="feed" aria-label="Posts feed"></div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="section" aria-label="Profile">
+            <div class="card profile-header">
+                <div class="profile-cover"></div>
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="profile-details">
+                        <h1 id="profileName">Ramesh Kumar</h1>
+                        <div class="profile-badges">
+                            <span class="badge business" id="profileBadge">Business</span>
+                            <span class="business-name" id="profileBusinessName">ABC Traders</span>
+                        </div>
+                        <div class="profile-about">
+                            <textarea 
+                                id="profileAbout" 
+                                placeholder="Tell us about yourself..."
+                                aria-label="About section"
+                            >Experienced business professional specializing in trading and commerce.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profilePosts" class="profile-posts" aria-label="User posts"></div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="loginTitle">Sign In</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <form class="modal-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required aria-label="Email address">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required aria-label="Password">
+                </div>
+                <button type="submit" class="btn-primary">Sign In</button>
+                <p class="form-footer">
+                    Don't have an account? 
+                    <a href="#" id="switchToRegister">Create account</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal" role="dialog" aria-labelledby="registerTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="registerTitle">Create Account</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <form class="modal-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required aria-label="Full name">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required aria-label="Email address">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required aria-label="Password">
+                </div>
+                <div class="form-group">
+                    <label for="registerBusinessName">Business Name (Optional)</label>
+                    <input type="text" id="registerBusinessName" aria-label="Business name">
+                </div>
+                <div class="form-group">
+                    <label for="registerCategory">Category</label>
+                    <select id="registerCategory" aria-label="Business category">
+                        <option value="individual">Individual</option>
+                        <option value="business">Business</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+                <p class="form-footer">
+                    Already have an account? 
+                    <a href="#" id="switchToLogin">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>BizLink</h3>
+                    <p>Professional networking made simple. Connect, share, and grow your business network.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow us on LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="2"/>
+                                <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Follow us on Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Follow us on Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Safety Guidelines</a></li>
+                        <li><a href="#">Best Practices</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:support@bizlink.com">Support</a></li>
+                        <li><a href="mailto:business@bizlink.com">Business Inquiries</a></li>
+                        <li><a href="#">Contact Form</a></li>
+                        <li><a href="tel:+1-555-0123">+1 (555) 012-3456</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 BizLink Technologies Inc. All rights reserved.</p>
+                    <div class="footer-meta">
+                        <span>Made with ❤️ for professionals worldwide</span>
+                        <span>•</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightboxModal" class="modal lightbox-modal" aria-hidden="true" role="dialog" aria-labelledby="lightboxTitle">
+        <div class="lightbox-overlay">
+            <div class="lightbox-content">
+                <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+                <button class="lightbox-prev" aria-label="Previous image">&#8249;</button>
+                <button class="lightbox-next" aria-label="Next image">&#8250;</button>
+                <img id="lightboxImage" src="" alt="Enlarged view" />
+                <div class="lightbox-counter">
+                    <span id="lightboxCounter">1 / 1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
